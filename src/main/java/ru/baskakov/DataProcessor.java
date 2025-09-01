@@ -49,4 +49,8 @@ public class DataProcessor {
             return Optional.ofNullable(taskResults.get(taskName));
         }
     }
+
+    public void shutdown() {
+        executor.shutdown();
+    }
 }
