@@ -14,16 +14,25 @@ public class CalculateSumTask implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        int sum = 0;
         System.out.println(taskName + " is running in thread " + Thread.currentThread().getName());
         try {
             Thread.sleep(200);
-            for (int i = 0; i < nums.size(); i++) {
-                sum += nums.get(i);
+            int sum = 0;
+            for (int num : nums) {
+                sum += num;
             }
+            return sum;
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
+            System.out.println(taskName + " is interrupted: " + e.getMessage());
+            throw e;
         }
-        return sum;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public List<Integer> getNums() {
+        return nums;
     }
 }
